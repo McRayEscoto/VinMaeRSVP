@@ -1,11 +1,12 @@
 import Link from "next/link";
-import RSVP from "@/app/rsvp/page";
 
 export default function TopBar() {
-  return (
-    <nav>
-      <Link href="/">Home</Link>
-      <Link href="/rsvp">RSVP</Link>
-    </nav>
-  );
+   return (
+      <nav className="w-dvw bg-color-main px-4 py-2 flex gap-4 justify-center">
+         <Link href="/main">Home</Link>
+         <Link href="/rsvp">RSVP</Link>
+         <Link href="/theme">Theme/Attire</Link>
+         <Link href="/gallery">Gallery</Link>
+      </nav>
+   );
 }
