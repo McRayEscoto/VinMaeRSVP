@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "../globals.css";
 import TopBar from "@/components/TopBar";
 import backgroundTexture from "@/assets/bg-texture.png"; // Import the texture image
 
-export const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`w-full h-dvh ${inter.className}`}
+        className={`w-full h-dvh`}
         style={{ backgroundImage: `url(${backgroundTexture.src})` }}
       >
         <TopBar />
