@@ -1,4 +1,4 @@
-import Guest from "../(models)/Guest";
+import Guest from "@/app/(models)/guest";
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 
@@ -15,11 +15,15 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const guestData = body.formData;
+    const guestData = body;
+    console.log('Received data:', guestData); // Log the received data
+
+    // Validate the data or perform any necessary checks
+
     await Guest.create(guestData);
     return NextResponse.json({ message: "Guest Added" }, { status: 201 });
   } catch (err) {
-    console.log(err);
+    console.error('Error creating guest:', err);
     return NextResponse.json({ message: "Error", err }, { status: 500 });
   }
 }
