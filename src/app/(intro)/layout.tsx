@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "../globals.css";
-import backgroundTexture from "@/assets/bg-texture.png"; // Import the texture image
+import backgroundTexture from "@/assets/bg-texture.png";
 
-export const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`flex justify-center items-center bg-cover bg-no-repeat bg-center ${inter.className}`}
+        className={`flex justify-center items-center bg-cover bg-no-repeat bg-center`}
         style={{ backgroundImage: `url(${backgroundTexture.src})`, width: "100vw", height: "100vh" }}
       >
         {children}
