@@ -152,7 +152,7 @@ export default function RSVP() {
                   className="appearance-none w-5 h-5 rounded-full border-2 border-gray-400 checked:border-lime-500 checked:bg-color-main transition-colors duration-300 cursor-pointer"
                 />
                 <label htmlFor="yes" className="ml-2 text-gray-700">
-                  Can't wait. See you soon!
+                  Can&apos;t wait. See you soon!
                 </label>
               </div>
               <div className="flex items-center">
@@ -165,7 +165,7 @@ export default function RSVP() {
                   className="appearance-none w-5 h-5 rounded-full border-2 border-gray-400 checked:bg-red-500 checked:border-red-600 transition-colors duration-300 cursor-pointer"
                 />
                 <label htmlFor="no" className="ml-2 text-gray-700">
-                  Sorry, can't make it.
+                  Sorry, can&apos;t make it.
                 </label>
               </div>
             </div>
