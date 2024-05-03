@@ -1,9 +1,13 @@
 import TopBar from "@/components/TopBar";
 import "../globals.css";
 import type { Metadata } from "next";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import { config } from "@fortawesome/fontawesome-svg-core";
+
+config.autoAddCss = false;
 
 export const metadata: Metadata = {
-  title: "VinMae Wedding",
+  title: "Philip+Jane Wedding",
   description: "We would like to invite you!",
 };
 

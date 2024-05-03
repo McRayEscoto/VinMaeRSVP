@@ -25,7 +25,7 @@ const config: Config = {
         sm: ['14px', '20px'],
         base: ['16px', '24px'],
         lg: ['20px', '28px'],
-        xl: ['300px', '200px'],
+        xl: ['270px', '200px'],
       },
     },
   },
