@@ -1,21 +1,11 @@
 "use client";
 import Image from "next/image";
-import { Cormorant_Garamond, Sacramento, Platypi } from "next/font/google";
+import { Cormorant_Garamond } from "next/font/google";
 import { useState, ChangeEvent, FormEvent } from "react";
-
-const inter = Platypi({
-  weight: "500",
-  subsets: ["latin"], // Add the subsets you need
-});
 
 const cormorant = Cormorant_Garamond({
   weight: "500",
   subsets: ["latin"], // Add the subsets you need
-});
-
-const sacramento = Sacramento({
-  weight: "400",
-  subsets: ["latin-ext"], // Add the subsets you need
 });
 
 export default function RSVP() {
