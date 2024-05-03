@@ -16,9 +16,20 @@ const config: Config = {
       colors: {
         "color-main": "#799468",
         "color-secondary": "#4A5B3F",
-      }
+      },
+      fontFamily: {
+        cormorant: ["Cormorant Garamond", "serif"],
+        dawning: ["Dawning of a New Day", "cursive"],
+      },
+      fontSize: {
+        sm: ['14px', '20px'],
+        base: ['16px', '24px'],
+        lg: ['20px', '28px'],
+        xl: ['300px', '200px'],
+      },
     },
   },
   plugins: [],
 };
+
 export default config;

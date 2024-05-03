@@ -84,7 +84,6 @@ export default function RSVP() {
             />
             <label htmlFor="yes">Yes</label>
           </div>
-          <h1>tesete</h1>
           <div>
             <input
               type="radio"
