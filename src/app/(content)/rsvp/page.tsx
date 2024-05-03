@@ -150,7 +150,7 @@ export default function RSVP() {
                 value="yes"
                 onChange={handleRadioChange}
               />
-              <label htmlFor="yes">Can't wait. See you soon!</label>
+              <label htmlFor="yes">Cant wait. See you soon!</label>
             </div>
             <div>
               <input
@@ -160,7 +160,7 @@ export default function RSVP() {
                 value="no"
                 onChange={handleRadioChange}
               />
-              <label htmlFor="no">Sorry, can't make it.</label>
+              <label htmlFor="no">Sorry, cant make it.</label>
             </div>
           </div>
           <button type="submit">Submit RSVP</button>
