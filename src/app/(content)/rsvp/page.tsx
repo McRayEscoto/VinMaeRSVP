@@ -74,8 +74,6 @@ export default function RSVP() {
       if (!response.ok) {
         throw new Error("Failed to submit RSVP");
       }
-
-      // Clear form data after successful submission
       setIsAttending(null);
       setGuestName("");
       setGuestList([]);
@@ -87,22 +85,23 @@ export default function RSVP() {
 
   return (
     <div className="flex w-5/6 h-5/6 border border-black blur-none">
-      <div className="relative w-3/5 border border-red-500 flex flex-col items-center">
-        <p
-          className={`${cormorant.className} w-fit h-fit text-color-main text-xl`}
-        >
-          RSVP
-        </p>
-        <Image
-          className="absolute top-40% left-1/2 transform -translate-x-1/2 -translate-y-1/2  border border-black"
-          src="/philjane.png"
-          width={450}
-          height={100}
-          alt="Picture of the author"
-        />
+      <div className="w-3/5 border border-red-500 flex flex-col items-center">
+        <div className="w-full flex flex-col justify-start items-center">
+          <p
+            className={`${cormorant.className} w-fit h-fit text-color-main text-xl `}
+          >
+            RSVP
+          </p>
+          <Image
+            src="/philjane.png"
+            width={450}
+            height={100}
+            alt="Picture of the author"
+          />
+        </div>
         <form
           onSubmit={handleSubmit}
-          className="w-full h-1/2 absolute bottom-0 border border-black"
+          className="w-full h-full flex flex-col justify-center items-start"
         >
           {isAttending !== null && (
             <>
@@ -143,7 +142,6 @@ export default function RSVP() {
             </>
           )}
           <div>
-            <p>Are you attending?</p>
             <div>
               <input
                 type="radio"
@@ -152,7 +150,7 @@ export default function RSVP() {
                 value="yes"
                 onChange={handleRadioChange}
               />
-              <label htmlFor="yes">Yes</label>
+              <label htmlFor="yes">Can't wait. See you soon!</label>
             </div>
             <div>
               <input
@@ -162,19 +160,21 @@ export default function RSVP() {
                 value="no"
                 onChange={handleRadioChange}
               />
-              <label htmlFor="no">No</label>
+              <label htmlFor="no">Sorry, can't make it.</label>
             </div>
           </div>
           <button type="submit">Submit RSVP</button>
         </form>
       </div>
-      <Image
-        className="absolute bottom-0 right-0 border border-black"
-        src="/boquet.png"
-        width={500}
-        height={500}
-        alt="Picture of the author"
-      />
+
+      <div className="w-full">
+        <Image
+          src="/boquet.png"
+          width={500}
+          height={500}
+          alt="Picture of the author"
+        />
+      </div>
     </div>
   );
 }
