@@ -10,7 +10,7 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    const handleRouteChange = (url: string) => {
+    const handleRouteChange = (url:string) => {
       if (url !== "/welcome") {
         router.push("/welcome");
       }
