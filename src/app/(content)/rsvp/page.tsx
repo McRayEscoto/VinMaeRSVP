@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { Cormorant_Garamond, Inter, Sacramento } from "next/font/google";
-import { useState, ChangeEvent, FormEvent } from "react";
+import { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUserPlus,
@@ -16,12 +16,12 @@ const inter = Inter({
 
 const cormorant = Cormorant_Garamond({
   weight: "500",
-  subsets: ["latin"], // Add the subsets you need
+  subsets: ["latin"],
 });
 
 const sacramento = Sacramento({
   weight: "400",
-  subsets: ["latin-ext"], // Add the subsets you need
+  subsets: ["latin-ext"],
 });
 
 export default function RSVP() {
@@ -30,8 +30,31 @@ export default function RSVP() {
   const [guestList, setGuestList] = useState<{ id: string; name: string }[]>(
     []
   );
-  const [hoveredGuest, setHoveredGuest] = useState<string | null>(null); // Add this line
-  const clusterId = 123;
+  const [hoveredGuest, setHoveredGuest] = useState<string | null>(null);
+  const [lastClusterId, setLastClusterId] = useState<number>(0);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetchLastClusterId();
+  }, []);
+
+  const fetchLastClusterId = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/api/");
+      if (!response.ok) {
+        throw new Error("Failed to fetch last cluster ID");
+      }
+      const data = await response.json();
+      setLastClusterId(
+        data.guests.length > 0
+          ? data.guests[data.guests.length - 1].clusterId + 1
+          : 1
+      );
+    } catch (error) {
+      console.error("Error fetching last cluster ID:", error);
+      setError("Failed to fetch last cluster ID");
+    }
+  };
 
   const handleRadioChange = (e: ChangeEvent<HTMLInputElement>) => {
     setIsAttending(e.target.value === "yes");
@@ -64,13 +87,13 @@ export default function RSVP() {
     e.preventDefault();
 
     const formData = {
-      clusterId,
+      clusterId: lastClusterId,
       isAttending,
       guestnames: guestList.map((guest) => guest.name),
     };
 
     try {
-      const response = await fetch("https://vin-mae-rsvp.vercel.app/api/", {
+      const response = await fetch("http://localhost:3000/api/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -84,9 +107,11 @@ export default function RSVP() {
       setIsAttending(false);
       setGuestName("");
       setGuestList([]);
+      setLastClusterId(lastClusterId + 1);
       console.log("RSVP submitted successfully!");
-    } catch (error: any) {
-      console.error("Error submitting RSVP:", error.message);
+    } catch (error) {
+      console.error("Error submitting RSVP:", error);
+      setError("Failed to submit RSVP");
     }
   };
 
@@ -94,6 +119,7 @@ export default function RSVP() {
     <div
       className={`${cormorant.className} flex items-center w-5/6 h-full blur-none`}
     >
+      {error && <p>Error: {error}</p>}
       <div className="w-3/5 h-5/6 flex flex-col items-center">
         <div className="w-full flex flex-col justify-start items-center">
           <p
@@ -115,7 +141,7 @@ export default function RSVP() {
           {isAttending !== null && (
             <div className="flex w-full flex-col">
               <label htmlFor="guestName" className="text-4xl">
-                Guest Name:
+                Guest Name: {lastClusterId}
               </label>
               <div className="flex w-full gap-3">
                 <input
