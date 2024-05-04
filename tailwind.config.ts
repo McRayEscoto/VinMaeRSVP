@@ -17,17 +17,6 @@ const config: Config = {
         "color-main": "#799468",
         "color-secondary": "#4A5B3F",
       },
-      fontFamily: {
-        cormorant: ["Cormorant Garamond", "serif"],
-        dawning: ["Dawning of a New Day", "cursive"],
-      },
-      fontSize: {
-        sm: ['14px', '20px'],
-        base: ['16px', '24px'],
-        lg: ['20px', '28px'],
-        xl: ['270px', '200px'],
-        xxl: ['40px', '50px'],
-      },
     },
   },
   plugins: [],
