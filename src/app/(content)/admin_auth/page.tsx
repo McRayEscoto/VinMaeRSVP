@@ -6,7 +6,7 @@ interface LoginPageProps {
   onLogin: () => void;
 }
 
-export default function LoginPage({ onLogin }: LoginPageProps) {
+const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -22,10 +22,8 @@ export default function LoginPage({ onLogin }: LoginPageProps) {
     e.preventDefault();
 
     // Replace these values with the ones from your .env.local file
-    const validUsername =
-      process.env.NEXT_PUBLIC_USERNAME;
-    const validPassword =
-      process.env.NEXT_PUBLIC_PASSWORD;
+    const validUsername = process.env.NEXT_PUBLIC_USERNAME;
+    const validPassword = process.env.NEXT_PUBLIC_PASSWORD;
 
     if (username === validUsername && password === validPassword) {
       onLogin();
@@ -60,4 +58,6 @@ export default function LoginPage({ onLogin }: LoginPageProps) {
       </form>
     </div>
   );
-}
+};
+
+export default LoginPage;
