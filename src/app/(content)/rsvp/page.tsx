@@ -40,7 +40,7 @@ export default function RSVP() {
 
   const fetchLastClusterId = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/");
+      const response = await fetch("https://vin-mae-rsvp.vercel.app/api//");
       if (!response.ok) {
         throw new Error("Failed to fetch last cluster ID");
       }
@@ -93,7 +93,7 @@ export default function RSVP() {
     };
 
     try {
-      const response = await fetch("http://localhost:3000/api/", {
+      const response = await fetch("https://vin-mae-rsvp.vercel.app/api//", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
