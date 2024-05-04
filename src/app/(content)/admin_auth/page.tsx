@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-
+import { useState, FormEventHandler } from "react";
 
 export default function LoginPage({ onLogin }: { onLogin: () => void }) {
   const [username, setUsername] = useState("");
@@ -15,7 +14,7 @@ export default function LoginPage({ onLogin }: { onLogin: () => void }) {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
     // Replace these values with the ones from your .env.local file
