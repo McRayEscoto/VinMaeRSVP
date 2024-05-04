@@ -32,29 +32,48 @@ const LoginPage = () => {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={handleUsernameChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={handlePasswordChange}
-          />
-        </div>
-        <button type="submit">Login</button>
-      </form>
+    <div className="h-full w-1/2 flex items-center justify-center">
+      <div className="max-w-md w-full bg-white rounded-lg shadow-md p-6">
+        <h2 className="text-2xl font-bold mb-4">Admin</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label
+              htmlFor="username"
+              className="block text-gray-700 font-medium mb-2"
+            >
+              Username:
+            </label>
+            <input
+              type="text"
+              id="username"
+              value={username}
+              onChange={handleUsernameChange}
+              className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="password"
+              className="block text-gray-700 font-medium mb-2"
+            >
+              Password:
+            </label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={handlePasswordChange}
+              className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+          <button
+            type="submit"
+            className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition-colors duration-300"
+          >
+            Login
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

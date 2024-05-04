@@ -26,6 +26,7 @@ const config: Config = {
         base: ['16px', '24px'],
         lg: ['20px', '28px'],
         xl: ['270px', '200px'],
+        xxl: ['40px', '50px'],
       },
     },
   },

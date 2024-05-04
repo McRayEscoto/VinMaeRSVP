@@ -7,23 +7,25 @@ export async function GET() {
     const guests = await Guest.find();
     return NextResponse.json({ guests }, { status: 200 });
   } catch (err) {
-    console.log(err);
-    return NextResponse.json({ message: "Error", err }, { status: 500 });
+    console.error("Error fetching guests:", err);
+    return NextResponse.json({ message: "Error fetching guests" }, { status: 500 });
   }
 }
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const guestData = body;
-    console.log('Received data:', guestData); // Log the received data
+    console.log('Received data:', body); // Log the received data
 
     // Validate the data or perform any necessary checks
+    if (!body || Object.keys(body).length === 0) {
+      throw new Error("Empty request body or invalid JSON data");
+    }
 
-    await Guest.create(guestData);
-    return NextResponse.json({ message: "Guest Added" }, { status: 201 });
+    const guest = await Guest.create(body);
+    return NextResponse.json({ message: "Guest added", guest }, { status: 201 });
   } catch (err) {
     console.error('Error creating guest:', err);
-    return NextResponse.json({ message: "Error", err }, { status: 500 });
+    return NextResponse.json({ message: "Error creating guest", err }, { status: 500 });
   }
 }
