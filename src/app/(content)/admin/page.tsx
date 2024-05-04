@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import LoginPage from '../admin_auth/page';
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 interface GuestData {
   clusterId: number;
@@ -10,60 +10,47 @@ interface GuestData {
 }
 
 export default function Administrator() {
+  const router = useRouter();
   const [guests, setGuests] = useState<GuestData[]>([]);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    const storedAuth = localStorage.getItem('isAuthenticated');
-    setIsAuthenticated(storedAuth === 'true');
-  }, []);
-
-  useEffect(() => {
-    if (isAuthenticated) {
+    const isAuthenticated = localStorage.getItem("isAuthenticated");
+    if (!isAuthenticated) {
+      router.push("/admin_auth");
+    } else {
       fetchGuests();
     }
-  }, [isAuthenticated]);
+  }, []);
 
   const fetchGuests = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api');
+      const response = await fetch("http://localhost:3000/api");
       const data = await response.json();
       setGuests(data.guests);
     } catch (err) {
-      console.error('Error fetching guests:', err);
+      console.error("Error fetching guests:", err);
     }
   };
 
-  const handleLogin = () => {
-    setIsAuthenticated(true);
-    localStorage.setItem('isAuthenticated', 'true');
-  };
-
   const handleLogout = () => {
-    setIsAuthenticated(false);
-    localStorage.removeItem('isAuthenticated');
+    localStorage.removeItem("isAuthenticated");
+    router.push("/admin/login");
   };
 
   return (
     <div>
-      {isAuthenticated ? (
-        <>
-          <button onClick={handleLogout}>Logout</button>
-          <h1>Admin</h1>
-          {guests.map(guest => (
-            <div key={guest.clusterId}>
-              <h2>Cluster ID: {guest.clusterId}</h2>
-              <ul>
-                {guest.guestnames.map((guestname, index) => (
-                  <li key={`${guest.clusterId}-${index}`}>{guestname}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </>
-      ) : (
-        <LoginPage onLogin={handleLogin} />
-      )}
+      <button onClick={handleLogout}>Logout</button>
+      <h1>Admin</h1>
+      {guests.map((guest) => (
+        <div key={guest.clusterId}>
+          <h2>Cluster ID: {guest.clusterId}</h2>
+          <ul>
+            {guest.guestnames.map((guestname, index) => (
+              <li key={`${guest.clusterId}-${index}`}>{guestname}</li>
+            ))}
+          </ul>
+        </div>
+      ))}
     </div>
   );
 }

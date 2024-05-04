@@ -1,12 +1,10 @@
 "use client";
 
 import { useState, FormEventHandler } from "react";
+import { useRouter } from "next/navigation";
 
-interface LoginPageProps {
-  onLogin: () => void;
-}
-
-const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
+const LoginPage = () => {
+  const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -26,7 +24,8 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
     const validPassword = process.env.NEXT_PUBLIC_PASSWORD;
 
     if (username === validUsername && password === validPassword) {
-      onLogin();
+      localStorage.setItem("isAuthenticated", "true");
+      router.push("/admin");
     } else {
       alert("Invalid username or password");
     }
