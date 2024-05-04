@@ -2,7 +2,11 @@
 
 import { useState, FormEventHandler } from "react";
 
-export default function LoginPage({ onLogin }: { onLogin: () => void }) {
+interface LoginPageProps {
+  onLogin: () => void;
+}
+
+export default function LoginPage({ onLogin }: LoginPageProps) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
