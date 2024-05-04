@@ -2,11 +2,8 @@
 
 import { useState } from "react";
 
-interface LoginPageProps {
-  onLogin: () => void;
-}
 
-const LoginPage = ({ onLogin }: LoginPageProps) => {
+export default function LoginPage({ onLogin }: { onLogin: () => void }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -60,6 +57,4 @@ const LoginPage = ({ onLogin }: LoginPageProps) => {
       </form>
     </div>
   );
-};
-
-export default LoginPage;
+}
