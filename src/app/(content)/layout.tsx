@@ -7,21 +7,21 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false;
 
 export const metadata: Metadata = {
-   title: "Philip+Jane Wedding",
-   description: "We would like to invite you!",
+  title: "Philip+Jane Wedding",
+  description: "We would like to invite you!",
 };
 
 export default function RootLayout({
-   children,
+  children,
 }: Readonly<{
-   children: React.ReactNode;
+  children: React.ReactNode;
 }>) {
-   return (
-      <html lang="en">
-         <body id="main_body" className="w-dvw min-h-dvh">
-            <TopBar />
-            {children}
-         </body>
-      </html>
-   );
+  return (
+    <html lang="en">
+      <body id="main_body" className="w-full h-dvh bg-opacity-25 flex flex-col items-center">
+        <TopBar></TopBar>
+        {children}
+      </body>
+    </html>
+  );
 }
