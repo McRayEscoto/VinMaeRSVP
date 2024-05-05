@@ -1,4 +1,3 @@
-import TopBar from "@/components/TopBar";
 import "../globals.css";
 import type { Metadata } from "next";
 import "@fortawesome/fontawesome-svg-core/styles.css";
@@ -18,8 +17,7 @@ export default function RootLayout({
 }>) {
    return (
       <html lang="en">
-         <body id="main_body" className="w-dvw min-h-dvh">
-            <TopBar />
+         <body id="main_body" className="lg:w-dvw lg:min-h-dvh w-full h-dvh flex justify-center items-center flex-col">
             {children}
          </body>
       </html>

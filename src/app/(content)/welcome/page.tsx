@@ -1,5 +1,5 @@
 export default function Welcome(){
   return(
-    <h1>Welcome</h1>
+    <main className="w-full h-full">Welcome</main>
   )
 }

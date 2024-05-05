@@ -26,7 +26,7 @@ export default function Administrator() {
 
   const fetchGuests = async () => {
     try {
-      const response = await fetch("https://philip-jane-rsvp.vercel.app/api");
+      const response = await fetch("http://localhost:3000/api");
       const data = await response.json();
       setGuests(data.guests);
     } catch (err) {
@@ -47,19 +47,23 @@ export default function Administrator() {
   };
 
   return (
-    <div className="w-full h-full flex flex-col bg-gray-100 py-8">
+    <div className="w-full min-h-screen flex flex-col bg-gray-100 py-8">
       <div className="container mx-auto px-4 flex-grow">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-[30px] font-bold text-gray-800">Admin</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">
+            Admin
+          </h1>
           <button
             onClick={handleLogout}
-            className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 transition-colors duration-300"
+            className="bg-red-500 text-white py-2 px-4 sm:px-6 rounded-md hover:bg-red-600 transition-colors duration-300"
           >
             Logout
           </button>
         </div>
         <div>
-          <h2 className="text-lg font-semibold mb-4">Attending Guests</h2>
+          <h2 className="text-lg sm:text-xl font-semibold mb-4">
+            Attending Guests
+          </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {attendingGuests.map((guest) => (
               <div
@@ -70,8 +74,8 @@ export default function Administrator() {
                   borderBottomRightRadius: "1rem",
                 }}
               >
-                <div className="px-6 py-4">
-                  <h2 className="text-[30px] font-semibold mb-2">
+                <div className="px-4 py-2 sm:px-6 sm:py-4">
+                  <h2 className="text-lg font-semibold mb-2 sm:text-xl">
                     Response No.: {guest.clusterId}
                   </h2>
                   <ul className="list-disc ml-4">
@@ -85,7 +89,9 @@ export default function Administrator() {
           </div>
         </div>
         <div>
-          <h2 className="text-lg font-semibold mb-4">Not Attending Guests</h2>
+          <h2 className="text-lg sm:text-xl font-semibold mb-4">
+            Not Attending Guests
+          </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {notAttendingGuests.map((guest) => (
               <div
@@ -96,8 +102,8 @@ export default function Administrator() {
                   borderBottomRightRadius: "1rem",
                 }}
               >
-                <div className="px-6 py-4">
-                  <h2 className="text-[30px] font-semibold mb-2">
+                <div className="px-4 py-2 sm:px-6 sm:py-4">
+                  <h2 className="text-lg font-semibold mb-2 sm:text-xl">
                     Response No.: {guest.clusterId}
                   </h2>
                   <ul className="list-disc ml-4">

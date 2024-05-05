@@ -13,7 +13,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import bouquetImage from "../../../../public/boquet.png";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], weight: ["400"] });
 const cormorant = Cormorant({ subsets: ["latin"] });
 const halimun = localFont({ src: "/Halimun.ttf" });
 const dawning = Dawning_of_a_New_Day({ weight: ["400"], subsets: ["latin"] });
@@ -112,8 +112,10 @@ export default function RSVP() {
   return (
     <>
       <ToastContainer />
-      <main className={`${cormorant.className} px-4 lg:flex lg:px-16 lg:pt-8`}>
-        <section>
+      <main
+        className={`${cormorant.className} w-5/6 h-full py-14 px-4 lg:flex lg:px-16 lg:pt-8 `}
+      >
+        <section className=" flex flex-col gap-14">
           <header
             className={`relative mb-6 flex flex-col items-center justify-center lg:mb-10`}
           >
@@ -123,15 +125,18 @@ export default function RSVP() {
               RSVP
             </h1>
             <span
-              className={`${halimun.className} absolute -bottom-4 text-3xl lg:text-5xl`}
+              className={`${halimun.className} absolute -bottom-8 text-3xl lg:text-5xl`}
             >
               Philip <span className={`${dawning.className}`}>+</span> Jane
+            </span>
+            <span className={`absolute -bottom-20 text-xl`}>
+              09.15.2024 - Saitama Prefecture, Japan
             </span>
           </header>
 
           <form
             onSubmit={handleSubmit}
-            className={`flex flex-col gap-2 text-xl mb-4`}
+            className={`flex flex-col gap-2 text-xl mb-4 `}
           >
             {isAttending !== null && (
               <section>
@@ -168,7 +173,7 @@ export default function RSVP() {
                 </div>
               </section>
             )}
-            <section className="flex flex-col gap-2">
+            <section className="flex flex-col gap-2 ">
               <div>
                 <label
                   htmlFor="yes"
@@ -231,14 +236,26 @@ export default function RSVP() {
           </section>
         </section>
 
-        <section className="flex flex-col items-end justify-end text-base lg:text-5xl">
+        <section className="flex flex-col items-end py-12 justify-start text-base lg:text-5xl">
           <Image
-            className="w-3/4 md:w-1/2 lg:w-3/4"
+            className="w-4/5 md:w-1/2 lg:w-3/4"
             src={bouquetImage}
             alt="flower"
-            width={1000}
-            height={1000}
+            width={1200}
+            height={1200}
           />
+          <div
+            className={`${inter.className} relative w-full text-2xl text-gray-700 flex justify-end`}
+          >
+            <h1 className="w-2/6 text-right">
+              THE PLEASURE OF YOUR REPLY IS REQUESTED BY THE
+            </h1>
+            <span
+              className={`${halimun.className} absolute -bottom-12 text-3xl`}
+            >
+              End of May
+            </span>
+          </div>
         </section>
       </main>
     </>
