@@ -47,7 +47,7 @@ export default function Administrator() {
   };
 
   return (
-    <div className="w-full min-h-screen flex flex-col bg-gray-100 py-8">
+    <div className="w-4/5 min-h-screen flex flex-col py-8">
       <div className="container mx-auto px-4 flex-grow">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">
