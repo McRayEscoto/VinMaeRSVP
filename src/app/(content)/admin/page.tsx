@@ -22,7 +22,7 @@ export default function Administrator() {
     } else {
       fetchGuests();
     }
-  }, []);
+  }, [router]);
 
   const fetchGuests = async () => {
     try {
