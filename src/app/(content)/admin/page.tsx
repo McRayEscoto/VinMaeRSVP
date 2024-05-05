@@ -26,7 +26,7 @@ export default function Administrator() {
 
   const fetchGuests = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api");
+      const response = await fetch("https://philip-jane-rsvp.vercel.app/api");
       const data = await response.json();
       setGuests(data.guests);
     } catch (err) {
