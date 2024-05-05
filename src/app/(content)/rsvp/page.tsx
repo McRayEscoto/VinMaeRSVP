@@ -9,6 +9,7 @@ import {
   faXmark,
   faPaperPlane,
 } from "@fortawesome/free-solid-svg-icons";
+import bouquetImage from '../../../../public/boquet.png';
 
 const inter = Inter({ subsets: ["latin"] });
 const cormorant = Cormorant({ subsets: ["latin"] });
@@ -225,10 +226,12 @@ export default function RSVP() {
       </section>
 
       <section className="flex flex-col items-end justify-end text-base lg:text-5xl">
-        <img
+        <Image
           className="w-3/4 md:w-1/2 lg:w-3/4"
-          src="/boquet.png"
+          src={bouquetImage}
           alt="flower"
+          width={1000}
+          height={1000}
         />
       </section>
     </main>
