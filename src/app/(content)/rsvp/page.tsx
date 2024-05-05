@@ -109,7 +109,6 @@ export default function RSVP() {
   return (
     <main className={`${cormorant.className} px-4 lg:flex lg:px-16 lg:pt-8`}>
       <section>
-        {error && <p>Error: {error}</p>}
         <header
           className={`relative mb-6 flex flex-col items-center justify-center lg:mb-10`}
         >
@@ -131,7 +130,7 @@ export default function RSVP() {
         >
           {isAttending !== null && (
             <section>
-              <label htmlFor="guestName">Guest Name: {lastClusterId}</label>
+              <label htmlFor="guestName">Guest Name:</label>
               <div className={`w-full flex gap-2 items-center justify-center`}>
                 <input
                   type="text"
@@ -225,10 +224,7 @@ export default function RSVP() {
         </section>
       </section>
 
-      <section className="flex flex-col items-end justify-end text-3xl lg:text-5xl">
-        <div className="w-full flex justify-end">
-          <p>Guests: {guestList.length}</p>
-        </div>
+      <section className="flex flex-col items-end justify-end text-base lg:text-5xl">
         <img
           className="w-3/4 md:w-1/2 lg:w-3/4"
           src="/boquet.png"

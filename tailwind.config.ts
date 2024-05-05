@@ -16,6 +16,7 @@ const config: Config = {
       colors: {
         "color-main": "#799468",
         "color-secondary": "#4A5B3F",
+        "color-main-opaque": "rgba(74,91,63,0.7)",
       },
     },
   },
