@@ -113,7 +113,7 @@ export default function RSVP() {
     <>
       <ToastContainer />
       <main
-        className={`${cormorant.className} w-5/6 h-full py-14 px-4 lg:flex lg:px-16 lg:pt-8`}
+        className={`${cormorant.className} w-5/6 h-full py-4 px-4 lg:flex lg:px-16 lg:pt-8`}
       >
         <section className=" flex flex-col gap-24">
           <header
@@ -137,109 +137,110 @@ export default function RSVP() {
             </div>
           </header>
 
-          <form
-            onSubmit={handleSubmit}
-            className={`flex flex-col gap-2 text-xl mb-4 `}
-          >
-            {isAttending !== null && (
-              <section>
-                <label htmlFor="guestName">Guest Name:</label>
-                <div
-                  className={`w-full flex gap-2 items-center justify-center`}
-                >
-                  <input
-                    type="text"
-                    id="guestName"
-                    value={guestName}
-                    onChange={handleNameChange}
-                    placeholder={
-                      !isAttending && guestList.length >= 1
-                        ? "Thank you"
-                        : "Enter guest name"
-                    }
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") {
-                        handleAddGuest();
+          <div className="w-full">
+            <form
+              onSubmit={handleSubmit}
+              className={`flex flex-col gap-2 text-xl mb-4 `}
+            >
+              {isAttending !== null && (
+                <section>
+                  <label htmlFor="guestName">Guest Name:</label>
+                  <div
+                    className={`w-full flex gap-2 items-center justify-center`}
+                  >
+                    <input
+                      type="text"
+                      id="guestName"
+                      value={guestName}
+                      onChange={handleNameChange}
+                      placeholder={
+                        !isAttending && guestList.length >= 1
+                          ? "Thank you"
+                          : "Enter guest name"
                       }
-                    }}
-                    disabled={!isAttending && guestList.length >= 1}
-                    className="w-full font-bold p-1 px-2 border-dotted border-b-4 border-gray-500 bg-transparent"
-                  />
-                  <button
-                    type="button"
-                    onClick={handleAddGuest}
-                    disabled={!isAttending && guestList.length >= 1}
-                    className={`p-2 rounded text-color-secondary transition-all hover:bg-color-main hover:text-white`}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          handleAddGuest();
+                        }
+                      }}
+                      disabled={!isAttending && guestList.length >= 1}
+                      className="w-full font-bold p-1 px-2 border-dotted border-b-4 border-gray-500 bg-transparent"
+                    />
+                    <button
+                      type="button"
+                      onClick={handleAddGuest}
+                      disabled={!isAttending && guestList.length >= 1}
+                      className={`p-2 rounded text-color-secondary transition-all hover:bg-color-main hover:text-white`}
+                    >
+                      <FontAwesomeIcon icon={faUserPlus} />
+                    </button>
+                  </div>
+                </section>
+              )}
+              <section className="flex flex-col gap-2 ">
+                <div>
+                  <label
+                    htmlFor="yes"
+                    className="text-gray-700 cursor-pointer flex items-center gap-2 w-fit"
                   >
-                    <FontAwesomeIcon icon={faUserPlus} />
-                  </button>
+                    <input
+                      id="yes"
+                      name="attending"
+                      type="radio"
+                      value="yes"
+                      defaultChecked
+                      onChange={handleRadioChange}
+                      className="appearance-none size-5 rounded-full border-2 border-gray-400 checked:border-lime-500 checked:bg-color-main transition-all cursor-pointer"
+                    />
+                    Can&apos;t wait. See you soon!
+                  </label>
+                  <label
+                    htmlFor="no"
+                    className="text-gray-700 cursor-pointer flex items-center gap-2 w-fit"
+                  >
+                    <input
+                      id="no"
+                      name="attending"
+                      type="radio"
+                      value="no"
+                      onChange={handleRadioChange}
+                      className="appearance-none size-5 rounded-full border-2 border-gray-400 checked:bg-red-500 checked:border-red-600 transition-all cursor-pointer"
+                    />
+                    Sorry, can&apos;t make it.
+                  </label>
                 </div>
+                <button
+                  type="submit"
+                  className="text-gray-700 cursor-pointer flex items-center gap-2 w-fit font-bold"
+                >
+                  <FontAwesomeIcon icon={faPaperPlane} />
+                  Submit!
+                </button>
               </section>
-            )}
-            <section className="flex flex-col gap-2 ">
-              <div>
-                <label
-                  htmlFor="yes"
-                  className="text-gray-700 cursor-pointer flex items-center gap-2 w-fit"
-                >
-                  <input
-                    id="yes"
-                    name="attending"
-                    type="radio"
-                    value="yes"
-                    defaultChecked
-                    onChange={handleRadioChange}
-                    className="appearance-none size-5 rounded-full border-2 border-gray-400 checked:border-lime-500 checked:bg-color-main transition-all cursor-pointer"
-                  />
-                  Can&apos;t wait. See you soon!
-                </label>
-                <label
-                  htmlFor="no"
-                  className="text-gray-700 cursor-pointer flex items-center gap-2 w-fit"
-                >
-                  <input
-                    id="no"
-                    name="attending"
-                    type="radio"
-                    value="no"
-                    onChange={handleRadioChange}
-                    className="appearance-none size-5 rounded-full border-2 border-gray-400 checked:bg-red-500 checked:border-red-600 transition-all cursor-pointer"
-                  />
-                  Sorry, can&apos;t make it.
-                </label>
-              </div>
-              <button
-                type="submit"
-                className="text-gray-700 cursor-pointer flex items-center gap-2 w-fit font-bold"
-              >
-                <FontAwesomeIcon icon={faPaperPlane} />
-                Submit!
-              </button>
+            </form>
+            <section className="text-xl">
+              <p>Guest List:</p>
+              <ul>
+                {guestList.map((guest, index) => (
+                  <li key={guest.id} className="w-fit flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => handleDeleteGuest(guest.id)}
+                      className="transition-all flex items-center justify-center hover:text-red-500"
+                    >
+                      <FontAwesomeIcon icon={faXmark} />
+                    </button>
+                    <p>
+                      {guest.id}. {guest.name}
+                    </p>
+                  </li>
+                ))}
+              </ul>
             </section>
-          </form>
-
-          <section className="text-xl">
-            <p>Guest Names:</p>
-            <ul>
-              {guestList.map((guest, index) => (
-                <li key={guest.id} className="w-fit flex items-center gap-2">
-                  <button
-                    type="button"
-                    onClick={() => handleDeleteGuest(guest.id)}
-                    className="transition-all flex items-center justify-center hover:text-red-500"
-                  >
-                    <FontAwesomeIcon icon={faXmark} />
-                  </button>
-                  <p>
-                    {guest.id}. {guest.name}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </section>
+          </div>
         </section>
 
-        <section className="flex flex-col items-end py-12 justify-start text-base lg:text-5xl">
+        <section className="flex flex-col-reverse lg:flex-col items-end py-12 justify-between text-sm lg:text-5xl">
           <Image
             className="w-4/5 md:w-1/2 lg:w-3/4"
             src={bouquetImage}
@@ -248,13 +249,13 @@ export default function RSVP() {
             height={1200}
           />
           <div
-            className={`${inter.className} relative w-full text-2xl text-gray-700 flex justify-end`}
+            className={`${inter.className} relative lg:w-2/6 lg:text-2xl text-gray-700 flex lg:justify-end`}
           >
-            <h1 className="w-2/6 text-right">
+            <h1 className="w-full lg:text-right">
               THE PLEASURE OF YOUR REPLY IS REQUESTED BY THE
             </h1>
             <span
-              className={`${halimun.className} absolute -bottom-12 text-3xl`}
+              className={`${halimun.className} absolute text-xl -bottom-8 lg:-bottom-12 lg:text-3xl`}
             >
               End of May
             </span>
