@@ -102,7 +102,7 @@ export default function RSVP() {
       setGuestName("");
       setGuestList([]);
       setLastClusterId(lastClusterId + 1);
-      toast.success("See you there!");
+      toast.success("Thank you for responding!");
     } catch (error) {
       console.error("Error submitting RSVP:", error);
       setError("Failed to submit RSVP");
