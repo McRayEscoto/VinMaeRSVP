@@ -125,13 +125,16 @@ export default function RSVP() {
               RSVP
             </h1>
             <span
-              className={`${halimun.className} absolute -bottom-8 text-xl lg:text-5xl`}
+              className={`${halimun.className} absolute -bottom-8 text-3xl lg:-bottom-8 lg:text-5xl`}
             >
               Philip <span className={`${dawning.className}`}>+</span> Jane
             </span>
-            <span className={`absolute -bottom-20 text-xl`}>
-              09.15.2024 - Saitama Prefecture, Japan
-            </span>
+            <div className="w-full absolute -bottom-24 lg:gap-3 flex justify-center items-center sm:flex-col lg:flex-row">
+              <span className="text-xl lg:-bottom-20">09.15.2024</span>
+              <span className="text-xl lg:-bottom-24">
+                Saitama Prefecture, Japan
+              </span>
+            </div>
           </header>
 
           <form
