@@ -15,8 +15,8 @@ export default function Home() {
 
    useEffect(() => {
       const handleRouteChange = (url: string) => {
-         if (url !== "/welcome") {
-            router.push("/welcome");
+         if (url !== "/rsvp") {
+            router.push("/rsvp");
          }
       };
 
@@ -35,7 +35,7 @@ export default function Home() {
    return (
       <div className="size-full flex flex-col items-center justify-center px-4">
          <Link
-            href="/welcome"
+            href="/rsvp"
             replace={true}
             className={`size-full flex flex-col items-center justify-center text-center`}
          >

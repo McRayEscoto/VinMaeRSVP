@@ -113,7 +113,7 @@ export default function RSVP() {
     <>
       <ToastContainer />
       <main
-        className={`${cormorant.className} w-5/6 h-full py-14 px-4 lg:flex lg:px-16 lg:pt-8 `}
+        className={`${cormorant.className} w-5/6 h-full py-14 px-4 lg:flex lg:px-16 lg:pt-8`}
       >
         <section className=" flex flex-col gap-14">
           <header
@@ -125,7 +125,7 @@ export default function RSVP() {
               RSVP
             </h1>
             <span
-              className={`${halimun.className} absolute -bottom-8 text-3xl lg:text-5xl`}
+              className={`${halimun.className} absolute -bottom-8 text-xl lg:text-5xl`}
             >
               Philip <span className={`${dawning.className}`}>+</span> Jane
             </span>
