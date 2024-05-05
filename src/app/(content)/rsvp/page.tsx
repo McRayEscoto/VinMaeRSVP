@@ -129,7 +129,7 @@ export default function RSVP() {
             >
               Philip <span className={`${dawning.className}`}>+</span> Jane
             </span>
-            <div className="w-full absolute h-fit -bottom-24 gap-3 flex flex-col justify-center items-center md:flex-col lg:flex-row">
+            <div className="w-full absolute h-fit -bottom-24 flex flex-col justify-center items-center md:flex-col lg:flex-row lg:gap-3">
               <span className="text-xl lg:-bottom-20">09.15.2024</span>
               <span className="text-xl lg:-bottom-24">
                 Saitama Prefecture, Japan
