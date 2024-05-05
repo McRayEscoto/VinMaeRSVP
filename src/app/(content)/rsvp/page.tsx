@@ -115,7 +115,7 @@ export default function RSVP() {
       <main
         className={`${cormorant.className} w-5/6 h-full py-14 px-4 lg:flex lg:px-16 lg:pt-8`}
       >
-        <section className=" flex flex-col gap-8">
+        <section className=" flex flex-col gap-24">
           <header
             className={`relative mb-6 flex flex-col items-center justify-center lg:mb-10`}
           >
@@ -125,7 +125,7 @@ export default function RSVP() {
               RSVP
             </h1>
             <span
-              className={`${halimun.className} absolute -bottom-4 text-xl lg:-bottom-8 lg:text-5xl`}
+              className={`${halimun.className} absolute -bottom-8 text-2xl lg:-bottom-8 lg:text-5xl`}
             >
               Philip <span className={`${dawning.className}`}>+</span> Jane
             </span>
