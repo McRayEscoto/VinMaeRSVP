@@ -249,7 +249,7 @@ export default function RSVP() {
             height={1200}
           />
           <div
-            className={`${inter.className} relative lg:w-2/6 lg:text-2xl text-gray-700 flex lg:justify-end`}
+            className={`${inter.className} mt-24 relative lg:w-2/6 lg:text-2xl text-gray-700 flex lg:justify-end`}
           >
             <h1 className="w-full lg:text-right">
               THE PLEASURE OF YOUR REPLY IS REQUESTED BY THE
