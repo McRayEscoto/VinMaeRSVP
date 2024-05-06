@@ -252,7 +252,7 @@ export default function RSVP() {
             </section>
           </div>
         </section>
-        <section className="flex flex-col-reverse items-end justify-center h-full gap-3 text-sm lg:w-1/2 lg:flex-col lg:text-5xl">
+        <section className="flex flex-col-reverse items-end justify-center h-full text-sm lg:w-1/2 lg:flex-col lg:text-5xl">
           <Image
             className="w-4/5 md:w-1/2 lg:w-full"
             src={bouquetImage}
@@ -263,11 +263,11 @@ export default function RSVP() {
           <div
             className={`${cormorant.className} lg:-mt-16 w-full flex-col gap-3 lg:w-2/6 lg:text-2xl text-gray-700 flex lg:justify-end`}
           >
-            <h1 className="w-full lg:text-right">
+            <h1 className="w-1/2 lg:text-right">
               THE PLEASURE OF YOUR REPLY IS REQUESTED BY THE
             </h1>
             <span
-              className={`${msmadi.className} lg:text-right text-4xl lg:-bottom-12 lg:text-5xl`}
+              className={`${msmadi.className} lg:text-right text-5xl lg:-bottom-12 lg:text-5xl`}
             >
               End &nbsp;of &nbsp;May
             </span>
