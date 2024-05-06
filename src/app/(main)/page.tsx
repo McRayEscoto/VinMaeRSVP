@@ -33,21 +33,21 @@ export default function Home() {
    }, [router]);
 
    return (
-      <div className="size-full flex flex-col items-center justify-center px-4">
+      <div className="flex flex-col items-center justify-center px-4 size-full">
          <Link
             href="/rsvp"
             replace={true}
             className={`size-full flex flex-col items-center justify-center text-center`}
          >
             <span
-               className={`${halimun.className} text-5xl transition-all hover:scale-105 md:text-6xl`}
+               className={`${halimun.className} leading-normal text-6xl transition-all hover:scale-105 md:text-6xl`}
             >
                You&apos;re Invited!
             </span>
             <span
                className={`${cormorant.className} font-black opacity-50 absolute bottom-40`}
             >
-               click anywhere to continue
+               Tap anywhere to continue
             </span>
          </Link>
       </div>

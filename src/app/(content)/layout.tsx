@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
    return (
       <html lang="en">
-         <body id="main_body" className="lg:w-dvw lg:min-h-dvh w-full h-full flex justify-center items-center flex-col">
+         <body id="main_body" className="w-full h-dvh flex justify-center items-center flex-col lg:w-dvw lg:min-h-dvh">
             {children}
          </body>
       </html>

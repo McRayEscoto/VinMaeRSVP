@@ -1,0 +1,80 @@
+<form
+              onSubmit={handleSubmit}
+              className={`flex flex-col gap-2 text-xl mb-4 `}
+            >
+              {isAttending !== null && (
+                <section>
+                  <label htmlFor="guestName">Guest Name:</label>
+                  <div
+                    className={`w-full flex gap-2 items-center justify-center`}
+                  >
+                    <input
+                      type="text"
+                      id="guestName"
+                      value={guestName}
+                      onChange={handleNameChange}
+                      placeholder={
+                        !isAttending && guestList.length >= 1
+                          ? "Thank you"
+                          : "Enter guest name"
+                      }
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          handleAddGuest();
+                        }
+                      }}
+                      disabled={!isAttending && guestList.length >= 1}
+                      className="w-full font-bold p-1 px-2 border-dotted border-b-4 border-gray-500 bg-transparent"
+                    />
+                    <button
+                      type="button"
+                      onClick={handleAddGuest}
+                      disabled={!isAttending && guestList.length >= 1}
+                      className={`p-2 rounded text-color-secondary transition-all hover:bg-color-main hover:text-white`}
+                    >
+                      <FontAwesomeIcon icon={faUserPlus} />
+                    </button>
+                  </div>
+                </section>
+              )}
+              <section className="flex flex-col gap-2 ">
+                <div>
+                  <label
+                    htmlFor="yes"
+                    className="text-gray-700 cursor-pointer flex items-center gap-2 w-fit"
+                  >
+                    <input
+                      id="yes"
+                      name="attending"
+                      type="radio"
+                      value="yes"
+                      defaultChecked
+                      onChange={handleRadioChange}
+                      className="appearance-none size-5 rounded-full border-2 border-gray-400 checked:border-lime-500 checked:bg-color-main transition-all cursor-pointer"
+                    />
+                    Can&apos;t wait. See you soon!
+                  </label>
+                  <label
+                    htmlFor="no"
+                    className="text-gray-700 cursor-pointer flex items-center gap-2 w-fit"
+                  >
+                    <input
+                      id="no"
+                      name="attending"
+                      type="radio"
+                      value="no"
+                      onChange={handleRadioChange}
+                      className="appearance-none size-5 rounded-full border-2 border-gray-400 checked:bg-red-500 checked:border-red-600 transition-all cursor-pointer"
+                    />
+                    Sorry, can&apos;t make it.
+                  </label>
+                </div>
+                <button
+                  type="submit"
+                  className="text-gray-700 cursor-pointer flex items-center gap-2 w-fit font-bold"
+                >
+                  <FontAwesomeIcon icon={faPaperPlane} />
+                  Submit!
+                </button>
+              </section>
+            </form>
