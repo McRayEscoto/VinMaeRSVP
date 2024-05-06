@@ -263,7 +263,7 @@ export default function RSVP() {
           <div
             className={`${cormorant.className} lg:-mt-16 w-full flex-col gap-3 lg:w-2/6 lg:text-2xl text-gray-700 flex lg:justify-end`}
           >
-            <h1 className="w-1/2 lg:text-right">
+            <h1 className="w-4/6 lg:text-right">
               THE PLEASURE OF YOUR REPLY IS REQUESTED BY THE
             </h1>
             <span
