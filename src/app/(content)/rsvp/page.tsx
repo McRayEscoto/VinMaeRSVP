@@ -141,7 +141,7 @@ export default function RSVP() {
                 <b className="text-3xl">09.15.2024</b>
               </span>
               <span className="text-2xl tracking-wide lg:">
-                <b>Saitama Prefecture, Japan</b>
+                Saitama Prefecture, Japan
               </span>
             </div>
           </header>
