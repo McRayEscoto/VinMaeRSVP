@@ -263,7 +263,7 @@ export default function RSVP() {
           <div
             className={`${inter.className} lg:-mt-16 w-full flex-col gap-3 lg:w-2/6 lg:text-2xl text-gray-700 flex lg:justify-end`}
           >
-            <h1 className="w-full text-sm lg:text-right">
+            <h1 className="w-full text-xs lg:text-right">
               THE PLEASURE OF YOUR REPLY IS REQUESTED BY THE
             </h1>
             <span
