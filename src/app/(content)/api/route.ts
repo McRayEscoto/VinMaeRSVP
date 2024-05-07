@@ -15,9 +15,8 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    console.log('Received data:', body); // Log the received data
+    console.log('Received data:', body);
 
-    // Validate the data or perform any necessary checks
     if (!body || Object.keys(body).length === 0) {
       throw new Error("Empty request body or invalid JSON data");
     }

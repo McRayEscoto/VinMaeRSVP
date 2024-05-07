@@ -44,7 +44,7 @@ export default function RSVP() {
 
   const fetchLastClusterId = async () => {
     try {
-      const response = await fetch("https://philip-jane-rsvp.vercel.app/api");
+      const response = await fetch("https://philip-jane-rsvp.vercel.app/api/");
       if (!response.ok) {
         throw new Error("Failed to fetch last cluster ID");
       }
@@ -98,15 +98,19 @@ export default function RSVP() {
     e.preventDefault();
 
     if (guestList.length === 0) {
-      // Display warning toast if no guest is added
       toast.warn("Add a guest before submitting.");
-      return; // Exit early if no guest is added
+      return;
     }
+
+    const guestdetails = guestList.map((guest) => ({
+      guestname: guest.name,
+      address: guest.address || " ", // Use "--:--,--:--" if address is undefined
+    }));
 
     const formData = {
       clusterId: lastClusterId,
       isAttending,
-      guestnames: guestList.map((guest) => guest.name), // Send only guest names
+      guestdetails,
     };
 
     try {
@@ -127,7 +131,6 @@ export default function RSVP() {
       setGuestList([]);
       setLastClusterId(lastClusterId + 1);
 
-      // Console log the submitted data
       console.log("Submitted Data:", formData);
 
       toast.success("Thank you for responding!");
@@ -136,7 +139,7 @@ export default function RSVP() {
       setError("Failed to submit RSVP");
     }
   };
-
+  
   return (
     <>
       <ToastContainer />
