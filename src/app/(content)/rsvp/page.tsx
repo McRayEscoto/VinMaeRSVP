@@ -24,12 +24,16 @@ const halimun = localFont({ src: "/Halimun.ttf" });
 const inter = Inter({ subsets: ["latin"], weight: ["400"] });
 const dawning = Dawning_of_a_New_Day({ weight: ["400"], subsets: ["latin"] });
 
+interface GuestDetails {
+  name: string;
+  address: string;
+}
+
 export default function RSVP() {
   const [isAttending, setIsAttending] = useState<boolean>(true);
   const [guestName, setGuestName] = useState<string>("");
-  const [guestList, setGuestList] = useState<{ id: string; name: string }[]>(
-    []
-  );
+  const [guestAddress, setGuestAddress] = useState<string>("");
+  const [guestList, setGuestList] = useState<GuestDetails[]>([]);
   const [hoveredGuest, setHoveredGuest] = useState<string | null>(null);
   const [lastClusterId, setLastClusterId] = useState<number>(0);
   const [error, setError] = useState<string | null>(null);
@@ -40,7 +44,7 @@ export default function RSVP() {
 
   const fetchLastClusterId = async () => {
     try {
-      const response = await fetch("https://philip-jane-rsvp.vercel.app/api/");
+      const response = await fetch("https://philip-jane-rsvp.vercel.app/api");
       if (!response.ok) {
         throw new Error("Failed to fetch last cluster ID");
       }
@@ -67,29 +71,41 @@ export default function RSVP() {
     setGuestName(e.target.value);
   };
 
+  const handleAddressChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setGuestAddress(e.target.value);
+  };
+
   const handleAddGuest = () => {
-    if (guestName.trim() !== "") {
-      const newGuest = {
-        id: String(guestList.length + 1),
+    if (guestName.trim() !== "" && guestAddress.trim() !== "") {
+      const newGuest: GuestDetails = {
         name: guestName.trim(),
+        address: guestAddress.trim(),
       };
       setGuestList([...guestList, newGuest]);
       setGuestName("");
+      setGuestAddress("");
     }
   };
 
-  const handleDeleteGuest = (id: string) => {
-    const updatedGuestList = guestList.filter((guest) => guest.id !== id);
+  const handleDeleteGuest = (index: number) => {
+    const updatedGuestList = [...guestList];
+    updatedGuestList.splice(index, 1);
     setGuestList(updatedGuestList);
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (guestList.length === 0) {
+      // Display warning toast if no guest is added
+      toast.warn("Add a guest before submitting.");
+      return; // Exit early if no guest is added
+    }
+
     const formData = {
       clusterId: lastClusterId,
       isAttending,
-      guestnames: guestList.map((guest) => guest.name),
+      guestdetails: guestList,
     };
 
     try {
@@ -106,8 +122,13 @@ export default function RSVP() {
       }
       setIsAttending(false);
       setGuestName("");
+      setGuestAddress("");
       setGuestList([]);
       setLastClusterId(lastClusterId + 1);
+
+      // Console log the submitted data
+      console.log("Submitted Data:", formData);
+
       toast.success("Thank you for responding!");
     } catch (error) {
       console.error("Error submitting RSVP:", error);
@@ -151,15 +172,24 @@ export default function RSVP() {
           >
             {isAttending !== null && (
               <section>
-                <label htmlFor="guestName">Guest Name:</label>
+                <label htmlFor="guestName">Guest Details:</label>
                 <div
-                  className={`w-full flex gap-2 items-center justify-center`}
+                  className={`w-full flex-col gap-2 items-center justify-center`}
                 >
                   <input
                     type="text"
                     id="guestName"
                     value={guestName}
-                    onChange={handleNameChange}
+                    onChange={(e) => {
+                      handleNameChange(e);
+                      if (e.target.value.length >= 2) {
+                        e.target.setCustomValidity("");
+                      } else {
+                        e.target.setCustomValidity(
+                          "Please enter at least 2 characters."
+                        );
+                      }
+                    }}
                     placeholder={
                       !isAttending && guestList.length >= 1
                         ? "Thank you"
@@ -170,18 +200,49 @@ export default function RSVP() {
                         handleAddGuest();
                       }
                     }}
+                    required
+                    minLength={2}
                     disabled={!isAttending && guestList.length >= 1}
                     className="w-full p-1 px-2 font-bold bg-transparent border-b-4 border-gray-500 border-dotted"
                   />
-                  <button
-                    type="button"
-                    onClick={handleAddGuest}
+                  <input
+                    type="text"
+                    id="guestAddress"
+                    value={guestAddress}
+                    onChange={(e) => {
+                      handleAddressChange(e);
+                      if (e.target.value.length >= 2) {
+                        e.target.setCustomValidity("");
+                      } else {
+                        e.target.setCustomValidity(
+                          "Please enter at least 2 characters."
+                        );
+                      }
+                    }}
+                    placeholder={
+                      !isAttending && guestList.length >= 1
+                        ? "Thank you"
+                        : "Enter Address"
+                    }
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        handleAddGuest();
+                      }
+                    }}
+                    required
+                    minLength={2}
                     disabled={!isAttending && guestList.length >= 1}
-                    className={`p-2 rounded text-color-secondary transition-all hover:bg-color-main hover:text-white`}
-                  >
-                    <FontAwesomeIcon icon={faUserPlus} />
-                  </button>
+                    className="w-full p-1 px-2 font-bold bg-transparent border-b-4 border-gray-500 border-dotted"
+                  />
                 </div>
+                <button
+                  type="button"
+                  onClick={handleAddGuest}
+                  disabled={!isAttending && guestList.length >= 1}
+                  className={`p-2 rounded text-color-secondary transition-all hover:bg-color-main hover:text-white`}
+                >
+                  <FontAwesomeIcon icon={faUserPlus} />
+                </button>
               </section>
             )}
             <section className="flex flex-col gap-2 ">
@@ -219,13 +280,16 @@ export default function RSVP() {
               <button
                 type="submit"
                 className="flex items-center gap-2 font-bold text-gray-700 transition duration-300 ease-in-out cursor-pointer w-fit hover:scale-110"
+                disabled={guestList.length === 0} // Disable if no guests are added
               >
                 <FontAwesomeIcon
                   icon={faPaperPlane}
                   className="transition duration-300 ease-in-out hover:scale-110"
                 />
                 <span className="transition duration-300 ease-in-out hover:scale-110">
-                  Submit!
+                  {guestList.length === 0
+                    ? "Please, add a guest first"
+                    : "Submit!"}
                 </span>
               </button>
             </section>
@@ -235,16 +299,16 @@ export default function RSVP() {
               <p>Guest List:</p>
               <ul>
                 {guestList.map((guest, index) => (
-                  <li key={guest.id} className="flex items-center gap-2 w-fit">
+                  <li key={index} className="flex items-center gap-2 w-fit">
                     <button
                       type="button"
-                      onClick={() => handleDeleteGuest(guest.id)}
+                      onClick={() => handleDeleteGuest(index)}
                       className="flex items-center justify-center transition-all hover:text-red-500"
                     >
                       <FontAwesomeIcon icon={faXmark} />
                     </button>
                     <p>
-                      {guest.id}. {guest.name}
+                      {index + 1}. {guest.name}, {guest.address}
                     </p>
                   </li>
                 ))}
