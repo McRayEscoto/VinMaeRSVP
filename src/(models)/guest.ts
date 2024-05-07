@@ -3,17 +3,27 @@ import mongoose, { Schema } from "mongoose";
 mongoose.connect(process.env.MONGODB_URI || "");
 mongoose.Promise = global.Promise;
 
+interface GuestDetails {
+  guestname: string;
+  address: string;
+}
+
 interface GuestData {
   clusterId: number;
   isAttending: boolean;
-  guestnames: string[];
+  guestdetails: GuestDetails[];
 }
+
+const guestDetailsSchema = new Schema<GuestDetails>({
+  guestname: { type: String, required: true },
+  address: { type: String, required: true },
+});
 
 const guestSchema = new Schema<GuestData>(
   {
     clusterId: { type: Number, required: true },
     isAttending: { type: Boolean, required: true },
-    guestnames: [{ type: String }],
+    guestdetails: [guestDetailsSchema],
   },
   {
     timestamps: true,
