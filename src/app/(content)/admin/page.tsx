@@ -3,10 +3,15 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
+interface GuestDetails {
+  guestname: string;
+  address: string;
+}
+
 interface GuestData {
   clusterId: number;
   isAttending: boolean;
-  guestnames: string[];
+  guestdetails: GuestDetails[];
 }
 
 export default function Administrator() {
@@ -70,17 +75,7 @@ export default function Administrator() {
   return (
     <div className="flex flex-col w-4/5 min-h-screen py-8">
       <div className="container flex-grow px-4 mx-auto">
-        <div className="flex items-center justify-between mb-8">
-          <h1 className="text-2xl font-bold text-gray-800 sm:text-3xl">
-            Admin
-          </h1>
-          <button
-            onClick={handleLogout}
-            className="px-4 py-2 text-white transition-colors duration-300 bg-red-500 rounded-md sm:px-6 hover:bg-red-600"
-          >
-            Logout
-          </button>
-        </div>
+        {/* ... */}
         <div>
           <h2 className="mb-4 text-lg font-semibold sm:text-xl">
             Attending Guests
@@ -100,8 +95,10 @@ export default function Administrator() {
                     Response No.: {guest.clusterId}
                   </h2>
                   <ul className="ml-4 list-disc">
-                    {guest.guestnames.map((guestname, index) => (
-                      <li key={`${guest.clusterId}-${index}`}>{guestname}</li>
+                    {guest.guestdetails.map((guestDetail, index) => (
+                      <li key={index}>
+                        {guestDetail.guestname}, {guestDetail.address}
+                      </li>
                     ))}
                   </ul>
                 </div>
@@ -134,8 +131,10 @@ export default function Administrator() {
                     Response No.: {guest.clusterId}
                   </h2>
                   <ul className="ml-4 list-disc">
-                    {guest.guestnames.map((guestname, index) => (
-                      <li key={`${guest.clusterId}-${index}`}>{guestname}</li>
+                    {guest.guestdetails.map((guestDetail, index) => (
+                      <li key={index}>
+                        {guestDetail.guestname}, {guestDetail.address}
+                      </li>
                     ))}
                   </ul>
                 </div>
