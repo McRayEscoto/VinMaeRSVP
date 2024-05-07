@@ -49,7 +49,7 @@ export default function Administrator() {
   const handleDeleteGuest = async (clusterId: number) => {
     if (window.confirm("Do you really want to delete this guest?")) {
       try {
-        const response = await fetch(`https://philip-jane-rsvp.vercel.app/api/${clusterId}`, {
+        const response = await fetch(`/api/${clusterId}`, {
           method: "DELETE",
         });
 
@@ -95,24 +95,22 @@ export default function Administrator() {
                   borderBottomRightRadius: "1rem",
                 }}
               >
-                <div className="flex items-center justify-between px-4 py-2 sm:px-6 sm:py-4">
-                  <div>
-                    <h2 className="mb-2 text-lg font-semibold sm:text-xl">
-                      Response No.: {guest.clusterId}
-                    </h2>
-                    <ul className="ml-4 list-disc">
-                      {guest.guestnames.map((guestname, index) => (
-                        <li key={`${guest.clusterId}-${index}`}>{guestname}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  <button
-                    onClick={() => handleDeleteGuest(guest.clusterId)}
-                    className="px-2 py-1 text-white transition-colors duration-300 bg-red-500 rounded-md hover:bg-red-600"
-                  >
-                    Delete
-                  </button>
+                <div className="px-4 py-2 sm:px-6 sm:py-4">
+                  <h2 className="mb-2 text-lg font-semibold sm:text-xl">
+                    Response No.: {guest.clusterId}
+                  </h2>
+                  <ul className="ml-4 list-disc">
+                    {guest.guestnames.map((guestname, index) => (
+                      <li key={`${guest.clusterId}-${index}`}>{guestname}</li>
+                    ))}
+                  </ul>
                 </div>
+                <button
+                  onClick={() => handleDeleteGuest(guest.clusterId)}
+                  className="px-2 py-1 text-white transition-colors duration-300 bg-red-500 rounded-md hover:bg-red-600"
+                >
+                  Delete
+                </button>
               </div>
             ))}
           </div>
@@ -122,7 +120,7 @@ export default function Administrator() {
             Not Attending Guests
           </h2>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {attendingGuests.map((guest) => (
+            {notAttendingGuests.map((guest) => (
               <div
                 key={guest.clusterId}
                 className="bg-white border-l-4 rounded-lg shadow-md border-main-color"
@@ -131,24 +129,22 @@ export default function Administrator() {
                   borderBottomRightRadius: "1rem",
                 }}
               >
-                <div className="flex items-center justify-between px-4 py-2 sm:px-6 sm:py-4">
-                  <div>
-                    <h2 className="mb-2 text-lg font-semibold sm:text-xl">
-                      Response No.: {guest.clusterId}
-                    </h2>
-                    <ul className="ml-4 list-disc">
-                      {guest.guestnames.map((guestname, index) => (
-                        <li key={`${guest.clusterId}-${index}`}>{guestname}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  <button
-                    onClick={() => handleDeleteGuest(guest.clusterId)}
-                    className="px-2 py-1 text-white transition-colors duration-300 bg-red-500 rounded-md hover:bg-red-600"
-                  >
-                    Delete
-                  </button>
+                <div className="px-4 py-2 sm:px-6 sm:py-4">
+                  <h2 className="mb-2 text-lg font-semibold sm:text-xl">
+                    Response No.: {guest.clusterId}
+                  </h2>
+                  <ul className="ml-4 list-disc">
+                    {guest.guestnames.map((guestname, index) => (
+                      <li key={`${guest.clusterId}-${index}`}>{guestname}</li>
+                    ))}
+                  </ul>
                 </div>
+                <button
+                  onClick={() => handleDeleteGuest(guest.clusterId)}
+                  className="px-2 py-1 text-white transition-colors duration-300 bg-red-500 rounded-md hover:bg-red-600"
+                >
+                  Delete
+                </button>
               </div>
             ))}
           </div>
