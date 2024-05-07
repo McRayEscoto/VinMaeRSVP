@@ -228,7 +228,6 @@ export default function RSVP() {
                         handleAddGuest();
                       }
                     }}
-                    minLength={2}
                     disabled={!isAttending && guestList.length >= 1}
                     className="w-full p-1 px-2 font-bold bg-transparent border-b-4 border-gray-500 border-dotted"
                   />
