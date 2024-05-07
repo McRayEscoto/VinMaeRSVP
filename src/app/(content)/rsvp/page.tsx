@@ -26,7 +26,7 @@ const dawning = Dawning_of_a_New_Day({ weight: ["400"], subsets: ["latin"] });
 
 interface GuestDetails {
   name: string;
-  address: string;
+  address?: string; // Made address optional
 }
 
 export default function RSVP() {
@@ -76,10 +76,11 @@ export default function RSVP() {
   };
 
   const handleAddGuest = () => {
-    if (guestName.trim() !== "" && guestAddress.trim() !== "") {
+    if (guestName.trim() !== "") {
+      // Check only for guest name
       const newGuest: GuestDetails = {
         name: guestName.trim(),
-        address: guestAddress.trim(),
+        address: guestAddress.trim() || undefined, // Set address to undefined if empty
       };
       setGuestList([...guestList, newGuest]);
       setGuestName("");
@@ -105,7 +106,7 @@ export default function RSVP() {
     const formData = {
       clusterId: lastClusterId,
       isAttending,
-      guestdetails: guestList,
+      guestnames: guestList.map((guest) => guest.name), // Send only guest names
     };
 
     try {
@@ -208,26 +209,12 @@ export default function RSVP() {
                     type="text"
                     id="guestAddress"
                     value={guestAddress}
-                    onChange={(e) => {
-                      handleAddressChange(e);
-                      if (e.target.value.length >= 2) {
-                        e.target.setCustomValidity("");
-                      } else {
-                        e.target.setCustomValidity(
-                          "Please enter at least 2 characters."
-                        );
-                      }
-                    }}
+                    onChange={handleAddressChange}
                     placeholder={
                       !isAttending && guestList.length >= 1
                         ? "Thank you"
-                        : "Enter Address"
+                        : "Enter Address (Optional)"
                     }
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") {
-                        handleAddGuest();
-                      }
-                    }}
                     disabled={!isAttending && guestList.length >= 1}
                     className="w-full p-1 px-2 font-bold bg-transparent border-b-4 border-gray-500 border-dotted"
                   />
@@ -305,7 +292,8 @@ export default function RSVP() {
                       <FontAwesomeIcon icon={faXmark} />
                     </button>
                     <p>
-                      {index + 1}. {guest.name}, {guest.address}
+                      {index + 1}. {guest.name}{" "}
+                      {guest.address && `, ${guest.address}`}
                     </p>
                   </li>
                 ))}
