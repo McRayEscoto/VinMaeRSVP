@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -46,71 +46,108 @@ export default function Administrator() {
     router.push("/admin_auth");
   };
 
+  const handleDeleteGuest = async (clusterId: number) => {
+    if (window.confirm("Do you really want to delete this guest?")) {
+      try {
+        const response = await fetch(`https://philip-jane-rsvp.vercel.app/api/${clusterId}`, {
+          method: "DELETE",
+        });
+
+        if (response.ok) {
+          // Remove the deleted guest from the state
+          setGuests((prevGuests) =>
+            prevGuests.filter((guest) => guest.clusterId !== clusterId)
+          );
+        } else {
+          console.error("Error deleting guest:", await response.text());
+        }
+      } catch (err) {
+        console.error("Error deleting guest:", err);
+      }
+    }
+  };
+
   return (
-    <div className="w-4/5 min-h-screen flex flex-col py-8">
-      <div className="container mx-auto px-4 flex-grow">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">
+    <div className="flex flex-col w-4/5 min-h-screen py-8">
+      <div className="container flex-grow px-4 mx-auto">
+        <div className="flex items-center justify-between mb-8">
+          <h1 className="text-2xl font-bold text-gray-800 sm:text-3xl">
             Admin
           </h1>
           <button
             onClick={handleLogout}
-            className="bg-red-500 text-white py-2 px-4 sm:px-6 rounded-md hover:bg-red-600 transition-colors duration-300"
+            className="px-4 py-2 text-white transition-colors duration-300 bg-red-500 rounded-md sm:px-6 hover:bg-red-600"
           >
             Logout
           </button>
         </div>
         <div>
-          <h2 className="text-lg sm:text-xl font-semibold mb-4">
+          <h2 className="mb-4 text-lg font-semibold sm:text-xl">
             Attending Guests
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {attendingGuests.map((guest) => (
               <div
                 key={guest.clusterId}
-                className="bg-white rounded-lg shadow-md border-l-4 border-main-color"
+                className="bg-white border-l-4 rounded-lg shadow-md border-main-color"
                 style={{
                   borderTopRightRadius: "1rem",
                   borderBottomRightRadius: "1rem",
                 }}
               >
-                <div className="px-4 py-2 sm:px-6 sm:py-4">
-                  <h2 className="text-lg font-semibold mb-2 sm:text-xl">
-                    Response No.: {guest.clusterId}
-                  </h2>
-                  <ul className="list-disc ml-4">
-                    {guest.guestnames.map((guestname, index) => (
-                      <li key={`${guest.clusterId}-${index}`}>{guestname}</li>
-                    ))}
-                  </ul>
+                <div className="flex items-center justify-between px-4 py-2 sm:px-6 sm:py-4">
+                  <div>
+                    <h2 className="mb-2 text-lg font-semibold sm:text-xl">
+                      Response No.: {guest.clusterId}
+                    </h2>
+                    <ul className="ml-4 list-disc">
+                      {guest.guestnames.map((guestname, index) => (
+                        <li key={`${guest.clusterId}-${index}`}>{guestname}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <button
+                    onClick={() => handleDeleteGuest(guest.clusterId)}
+                    className="px-2 py-1 text-white transition-colors duration-300 bg-red-500 rounded-md hover:bg-red-600"
+                  >
+                    Delete
+                  </button>
                 </div>
               </div>
             ))}
           </div>
         </div>
         <div>
-          <h2 className="text-lg sm:text-xl font-semibold mb-4">
+          <h2 className="mb-4 text-lg font-semibold sm:text-xl">
             Not Attending Guests
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {notAttendingGuests.map((guest) => (
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            {attendingGuests.map((guest) => (
               <div
                 key={guest.clusterId}
-                className="bg-white rounded-lg shadow-md border-l-4 border-main-color"
+                className="bg-white border-l-4 rounded-lg shadow-md border-main-color"
                 style={{
                   borderTopRightRadius: "1rem",
                   borderBottomRightRadius: "1rem",
                 }}
               >
-                <div className="px-4 py-2 sm:px-6 sm:py-4">
-                  <h2 className="text-lg font-semibold mb-2 sm:text-xl">
-                    Response No.: {guest.clusterId}
-                  </h2>
-                  <ul className="list-disc ml-4">
-                    {guest.guestnames.map((guestname, index) => (
-                      <li key={`${guest.clusterId}-${index}`}>{guestname}</li>
-                    ))}
-                  </ul>
+                <div className="flex items-center justify-between px-4 py-2 sm:px-6 sm:py-4">
+                  <div>
+                    <h2 className="mb-2 text-lg font-semibold sm:text-xl">
+                      Response No.: {guest.clusterId}
+                    </h2>
+                    <ul className="ml-4 list-disc">
+                      {guest.guestnames.map((guestname, index) => (
+                        <li key={`${guest.clusterId}-${index}`}>{guestname}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <button
+                    onClick={() => handleDeleteGuest(guest.clusterId)}
+                    className="px-2 py-1 text-white transition-colors duration-300 bg-red-500 rounded-md hover:bg-red-600"
+                  >
+                    Delete
+                  </button>
                 </div>
               </div>
             ))}
